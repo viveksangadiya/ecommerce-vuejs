@@ -108,22 +108,20 @@ export default {
                 this.add_to_cart(item);
                 console.log(item)
                 var json={
-                    userId: this.user._id,
-                    items:[
+                    items:
                         {
                             productId: item._id,
                             quantity: this.quantity
-                        },
-                    ],
-                    "totalPrice":150
+                        }
                 }
                 console.log(json);
                 console.log(this.user.accessToken);
-                await axios.post("http://localhost:8000/api/carts/",{
+                await axios.post("http://localhost:8000/api/carts/",json,{
                         headers: {
-                            Authorization: "Bearer" + `${this.user.accessToken}`,
+                            'token': "Bearer " + `${this.user.accessToken}`,
+                            'Content-Type': 'application/json'
                         },
-                    },json).then((res)=>{
+                    }).then((res)=>{
                     console.log("cart added",res);
                 })
             }

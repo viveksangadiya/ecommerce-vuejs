@@ -3,7 +3,7 @@
         <div class="container">
             <nav class="top__navigation">
                 <router-link to="/">
-                    <h3 class="logo">Buy-It</h3>
+                    <h3 class="logo">Jagdus</h3>
                 </router-link>
 
                 <div class="nav__links" :class="{ activeNav: showSideNav }">
