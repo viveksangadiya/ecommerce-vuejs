@@ -159,9 +159,14 @@ export default {
     methods: {
         async placeOrder() {
             this.noOrder = false;
+            this.cart.map((item) => {
+                console.log("order",item)
+            })
+            console.log("this.userState",this.userState)
+            console.log("this.userAddress",this.userAddress)
             await axios
                 .post(
-                    "https://gorana.onrender.com/orders/",
+                    "http://localhost:8000/api/orders/",
                     {
                         orders: this.cart.map((item) => {
                             return {

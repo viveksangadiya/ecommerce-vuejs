@@ -5,18 +5,18 @@
         subHeading="Save more with coupons up to 70% off"
     />
     <div class="container">
-        <div class="product__container" v-if="loaded">
+        <div class="product__container" v-if="true">
             <product-card
                 v-for="(product, index) in products"
                 :key="index"
                 :productId="product._id"
-                :productName="product.name"
-                :brand="product.brand"
+                :productName="product.title"
+                
                 :price="product.price"
                 :currency="product.currency"
-                :ratings="product.rating"
-                :image_url="product.images[0]"
-                :in_stock="product.in_stock"
+                
+                :image_url="product.img[0]"
+                :in_stock="product.inStock"
             />
         </div>
         <product-preloader v-else> Loading products... </product-preloader>
@@ -104,16 +104,17 @@ export default {
         getProducts() {
             this.loaded = false;
             axios
-                .get(`https://gorana.onrender.com/products?page=${this.page}`)
+                .get(`http://localhost:8000/api/products/`)
                 .then((res) => {
-                    this.products = res.data.results.map((product) => {
-                        product.images[0] = product.images[0].replace(
-                            "http",
-                            "https"
-                        );
-                        return product;
-                    });
-                    this.total = res.data.total_pages;
+                    this.products = res.data;
+                    // this.products = res.data.results.map((product) => {
+                    //     product.images[0] = product.images[0].replace(
+                    //         "http",
+                    //         "https"
+                    //     );
+                    //     return product;
+                    // });
+                    // this.total = res.data.total_pages;
                     this.loaded = true;
                 })
                 .catch((err) => {

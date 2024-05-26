@@ -1,4 +1,3 @@
-# Buy-It
 
 ## Project setup
 

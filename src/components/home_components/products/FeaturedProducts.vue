@@ -12,7 +12,7 @@
                 :price="product.price"
                 :currency="product.currency"
                 :ratings="product.rating"
-                :image_url="product.images[0]"
+                :image_url="product.img[0]"
                 :in_stock="product.in_stock"
             />
         </div>

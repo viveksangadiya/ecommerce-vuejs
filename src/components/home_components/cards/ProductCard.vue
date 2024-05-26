@@ -1,8 +1,8 @@
 <template>
     <div class="product__card">
         <img
-            :src="image_url"
-            :alt="brand"
+            :src="img"
+            
             class="product__image"
             loading="lazy"
         />
@@ -47,7 +47,7 @@ export default {
     props: [
         "productId",
         "image_url",
-        "brand",
+        
         "productName",
         "price",
         "currency",

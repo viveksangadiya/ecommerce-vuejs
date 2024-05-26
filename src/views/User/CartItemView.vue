@@ -20,7 +20,7 @@
                 <img :src="activeImage" class="main-img" />
                 <div class="img-thumbnails">
                     <img
-                        v-for="(image, index) in product.images.slice(0, 4)"
+                        v-for="(image, index) in product.img.slice(0, 4)"
                         :key="index"
                         :src="image"
                         class="thumbnail"
@@ -96,7 +96,7 @@ export default {
         setActiveImage(image) {
             this.activeImage = this.product.images[image];
         },
-        addItemToCart() {
+        async addItemToCart() {
             if (this.size === "Select Size") {
                 this.validSize = true;
             } else {
@@ -106,6 +106,26 @@ export default {
                     size: this.size,
                 };
                 this.add_to_cart(item);
+                console.log(item)
+                var json={
+                    userId: this.user._id,
+                    items:[
+                        {
+                            productId: item._id,
+                            quantity: this.quantity
+                        },
+                    ],
+                    "totalPrice":150
+                }
+                console.log(json);
+                console.log(this.user.accessToken);
+                await axios.post("http://localhost:8000/api/carts/",{
+                        headers: {
+                            Authorization: "Bearer" + `${this.user.accessToken}`,
+                        },
+                    },json).then((res)=>{
+                    console.log("cart added",res);
+                })
             }
         },
     },
@@ -117,11 +137,11 @@ export default {
     },
     async created() {
         let res = await axios.get(
-            `https://gorana.onrender.com/products/${this.$route.params.id}`
+            `http://localhost:8000/api/products/${this.$route.params.id}`
         );
         this.product = res.data;
         this.loaded = true;
-        this.activeImage = this.product.images[0];
+        this.activeImage = this.product.img[0];
     },
 };
 </script>

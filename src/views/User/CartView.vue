@@ -41,12 +41,12 @@
                                 </td>
                                 <td>
                                     <img
-                                        :src="item.images[0]"
-                                        :alt="item.brand"
+                                        :src="item.img[0]"
+                                        
                                         class="img"
                                     />
                                 </td>
-                                <td>{{ item.brand }}({{ item.size }})</td>
+                                <td>({{ item.size }})</td>
                                 <td>
                                     {{ item.currency }}
                                     {{ item.price.toFixed(2) }}
